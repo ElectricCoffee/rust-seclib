@@ -17,11 +17,11 @@ where
 }
 
 /// Low security level (L in Haskell's SecLib)
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Low;
 
 /// High Security level (H in Haskell's SecLib)
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct High;
 
 /// Implements L &leq; L at the type level

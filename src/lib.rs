@@ -1,11 +1,14 @@
 use std::marker::PhantomData;
 
+#[cfg(test)]
+mod tests;
+
 pub mod security_level;
 
 use security_level as sl;
 
 /// The Sec monad which wraps any kind of data with a `SecurityLevel`
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Sec<S, A>
 where
     S: sl::SecurityLevel, // s must be a security level
@@ -51,15 +54,11 @@ where
     }
 }
 
-// The example from the paper of a tuple with a secured char and an int
-fn f((cs, i): (Sec<sl::High, char>, i32)) -> (Sec<sl::High, char>, i32) {
-    (cs.map(|c| ((c as u8) + 1) as char), i + 3)
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+impl<S, A> From<A> for Sec<S, A> 
+where
+    S : sl::SecurityLevel
+{
+    fn from(data: A) -> Sec<S, A> {
+        Sec::new(data)
     }
 }
