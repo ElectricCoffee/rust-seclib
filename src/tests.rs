@@ -1,11 +1,5 @@
 use super::Sec;
 use super::security_level::*;
-// The example from the paper of a tuple with a secured char and an int
-fn f((cs, i): (Sec<High, char>, i32)) -> (Sec<High, char>, i32) {
-    let lhs = cs.map(|c| ((c as u8) + 1) as char);
-    let rhs = i + 3;
-    (lhs, rhs)
-}
 
 #[test]
 fn test_map() {
