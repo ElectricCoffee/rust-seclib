@@ -13,8 +13,9 @@ pub struct Sec<S, A>
 where
     S: sl::SecurityLevel, // s must be a security level
 {
-    security_level: PhantomData<S>, // Rust's way of representing phantom types
-    data: A,
+    // these fields are public only within the library. Outsiders won't have access
+    pub (crate) security_level: PhantomData<S>, // Rust's way of representing phantom types
+    pub (crate) data: A,
 }
 
 impl<S, A> Sec<S, A> 
