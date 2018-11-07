@@ -1,5 +1,4 @@
-use super::Sec;
-use super::security_level::*;
+use super::prelude::*;
 
 #[test]
 fn test_map() {

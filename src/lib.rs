@@ -5,6 +5,8 @@ mod tests;
 
 pub mod security_level;
 
+pub mod prelude;
+
 use security_level as sl;
 
 /// The Sec monad which wraps any kind of data with a `SecurityLevel`
