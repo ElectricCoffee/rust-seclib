@@ -50,7 +50,10 @@ where
     
     /// Reveal returns the value from within a `Sec`.
     /// Note that in order to do so, it must be supplied with a security level &geq; the `Sec`'s
-    pub fn reveal<S2>(self, _: S2) -> A where S2: sl::SecurityLevel<S> {
+    pub fn reveal<S2>(self, _: S2) -> A 
+    where 
+        S2: sl::SecurityLevel<S> + sl::SecurityLevel
+    {
         self.data
     }
 }
