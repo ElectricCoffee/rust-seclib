@@ -56,3 +56,34 @@ fn test_reveal() {
 
     // NOTE: Last case cannot be tested, because it cannot compile. (which is the whole idea)
 }
+
+#[test]
+fn test_lift() {
+    // testing lifting from low to high
+    let data: Sec<Low, String> = String::from("Attack at dawn").into();
+    let result = data.lift(High);
+    let expected: Sec<High, String> = String::from("Attack at dawn").into();
+
+    assert_eq!(result, expected);
+
+    // .. from low to low
+    let data: Sec<Low, String> = String::from("Attack at noon").into();
+    let result = data.lift(Low);
+    let expected: Sec<Low, String> = String::from("Attack at noon").into();
+
+    assert_eq!(result, expected);
+
+    // .. from high to high
+    let data: Sec<High, String> = String::from("Attack at night").into();
+    let result = data.lift(High);
+    let expected: Sec<High, String> = String::from("Attack at night").into();
+
+    assert_eq!(result, expected);
+
+    // Does not compile, as intended!
+    // let data: Sec<High, String> = String::from("Attack now!").into();
+    // let result = data.lift(Low);
+    // let expected: Sec<Low, String> = String::from("Attack now!").into();
+
+    // assert_eq!(result, expected);
+}
