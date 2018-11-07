@@ -56,6 +56,15 @@ where
     {
         self.data
     }
+
+    /// Lifts the data to a higher security level within a `Sec`.
+    pub fn lift<S2>(self, _: S2) -> Sec<S2, A>
+    where
+        S2: sl::SecurityLevel<S> + sl::SecurityLevel
+    {
+        let Sec { data, ..} = self;
+        Sec::new(data)
+    }
 }
 
 impl<S, A> From<A> for Sec<S, A> 
